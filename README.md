@@ -3,7 +3,6 @@
 This is the philosophers' project from 42Network.
 Link to the subject: https://cdn.intra.42.fr/pdf/pdf/66003/fr.subject.pdf
 
-
 Prior to diving into my notes and thought process for this project, I highly recommend watching the captivating YouTube video playlist titled "Unix Threads in C" created by CodeVault. It covers key notions regarding threads, race conditions, mutex, and even semaphores if you plan to tackle the bonus part.
 
 LGRIND
@@ -12,9 +11,13 @@ Lgrind is a tool quite like Valgrind but for threads.
 WHAT IS A THREAD?
 
 In this project, we delve into a new concept: threads. 
-Threads enable concurrent execution and allow different parts of a program to run independently. Each philosopher is represented by a thread. It works quite like processes with forks, but the main difference is that when forking, we duplicate all the variables, while threads share the same memory space.
+Threads enable concurrent execution and allow different parts of a program to run independently.  It works quite like processes with forks, but the main difference is that when forking, we duplicate all the variables, while threads share the same memory space.
 
 That is really cool because it makes it easier to communicate between threads than it is to communicate between processes.
+
+Each philosopher is represented by a thread. 
+store them in an array.
+
 
 But when using threads, we might encounter a race condition problem. I'll let you research the subject by yourself. Once again, the CodeVault video is very comprehensive: https://youtu.be/FY9livorrJI
 
@@ -43,7 +46,7 @@ FED,
 DEAD
 };
 
-SLEEPING, EATING, AND THINKING
+SLEEPING, EATING AND THINKING
 
 Philosophers spend their time thinking, eating, and sleeping.
 

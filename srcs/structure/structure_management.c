@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 22:52:14 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/19 12:31:00 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/19 19:35:39 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	initialize_data_structure(t_data *data, char **argv)
 {
+	data->nb_death = 0;
 	data->nb_philo = get_arg(argv[1]);
 	check_nb_philo(data->nb_philo);
 	data->fork = get_arg(argv[1]);
@@ -25,15 +26,12 @@ void	initialize_data_structure(t_data *data, char **argv)
 
 // changer prototype pour init l'id a N.
 
-void	initialize_philo_structure(t_philo *philo)
+void	initialize_philo_structure(t_philo *philo, int i)
 {
-	philo->id = 0;
+	if (pthread_mutex_init((&philo)->mutex, NULL) != 0)
+		error(0);
+	philo->id = i;
 	philo->status = START;
 	philo->nb_meal = 0;
-}
-
-void	initialize_structures(t_data *data, t_philo *philo, char **argv)
-{
-	initialize_data_structure(data, argv);
-	initialize_philo_structure(philo);
+	philo->last_meal = 0;
 }

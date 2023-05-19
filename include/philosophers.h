@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 13:47:40 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/19 14:48:59 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/19 19:36:45 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_data
 	int			fork;
 	int			nb_philo;
 	int			nb_required_meal;
+	int			nb_death;
 	suseconds_t	current_time;
 	suseconds_t	time_to_die;
 	suseconds_t	time_to_eat;
@@ -54,10 +55,12 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	int			id;
-	int			status;
-	int			nb_meal;	
-	suseconds_t	last_meal;
+	pthread_t		thread;
+	pthread_mutex_t	mutex;
+	int				id;
+	int				status;
+	int				nb_meal;	
+	suseconds_t		last_meal;
 }	t_philo;
 
 //////////////////////////////////////////////////////////////////
@@ -71,12 +74,15 @@ typedef struct s_philo
 // Main.c
 int		main(int argc, char **argv);
 
+// Erroc.c
+void	error(int code);
+
 // Philo.c
-void	philo(t_data *data, t_philo *philo);
+t_philo	create_a_philosopher(int i);
+void	philo(t_data *data);
 
 // Philo_utils.c
 int		get_time(void);
-int		ft_strlen(char *str);
 
 // Status.c
 int		is_alive(t_philo *philo, t_data *data);
@@ -87,7 +93,7 @@ void	is_thinking(t_philo *philo, t_data *data);
 
 //////////////////////////////////////////////////////////////////
 //																//
-//					  	IN STRUCTURES DIR 						//
+//                      IN STRUCTURES DIR                       //
 //																//
 //////////////////////////////////////////////////////////////////
 
@@ -103,7 +109,6 @@ int		is_sign(char c);
 
 // Structure_management.c
 void	initialize_data_structure(t_data *data, char **argv);
-void	initialize_philo_structure(t_philo *philo);
-void	initialize_structures(t_data *data, t_philo *philo, char **argv);
+void	initialize_philo_structure(t_philo *philo, int i);
 
 #endif

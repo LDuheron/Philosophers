@@ -22,11 +22,12 @@ int	is_alive(t_philo *philo, t_data *data)
 	if ((philo->last_meal - data->current_time) < data->time_to_die)
 		return (1);
 	philo->status = DEAD;
+	data->nb_death += 1;
 	// printf("%i %i x died\n", data->current_time, philo->id);
 	return (0);
 }
 
-// is_fed : This function checks if the philosopher has eaten the
+// IS_FED : This function checks if the philosopher has eaten the
 // amount of time required (define in the parameters of the program).
 
 void	is_fed(t_philo *philo, t_data *data)
@@ -37,14 +38,13 @@ void	is_fed(t_philo *philo, t_data *data)
 
 void	is_eating(t_philo *philo, t_data *data)
 {
-	pthread_mutex_lock
+	pthread_mutex_lock((&philo)->mutex));
 	// printf("%i %i x has taken a fork\n", data->current_time, philo->id);
 	philo->status = EATING;
 	// printf("%i %i x is eating\n", data->current_time, philo->id);
-	printf("Philo is eating\n");
 	usleep(data->time_to_eat);
 	philo->nb_meal += 1;
-	pthread_mutex_unlock ;
+	pthread_mutex_unlock((&philo)->mutex));
 	philo->status = THINKING;
 }
 
@@ -64,9 +64,3 @@ void	is_thinking(t_philo *philo, t_data *data)
 	// printf("%i %i x is thinking\n", data->current_time, philo->id);
 	printf("Philo is thinking\n");
 }
-
-/*
-	Fork management :
-
-	// printf("%i %i x has taken a fork\n", data->current_time, philo->id)
-*/

@@ -8,6 +8,7 @@ SRC_DIR     := srcs
 OBJ_DIR     := obj
 SRCS        := \
 	main.c          \
+	error.c          \
 	philo.c          \
 	philo_utils.c          \
 	status.c			\

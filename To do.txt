@@ -1,10 +1,8 @@
 TO DO
 
-- init mutex, comprendre mutex
-- actions EATING
-- actions SLEEPING
-- actions THINKING
-- supervisor
+- creer les threads avec une boucle et les ranger dans un tableau (comment ?)
+- init les threads
+- run les threads.
 - count time.
 
 AVANT DE PUSH :
