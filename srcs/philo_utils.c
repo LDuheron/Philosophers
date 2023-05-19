@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 23:11:28 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/18 23:13:47 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/19 09:38:12 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	ft_atoi(const char *str)
 	nbr = nbr * sign;
 	return (nbr);
 }
+
 
 int	ft_strlen(char *str)
 {
