@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 13:47:40 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/19 12:29:47 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/19 14:48:59 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ enum e_type_status_philo
 	EATING,
 	SLEEPING,
 	THINKING,
-	DONE,
+	FED,
 	DEAD
 } ;
 
@@ -72,7 +72,7 @@ typedef struct s_philo
 int		main(int argc, char **argv);
 
 // Philo.c
-void	philo(t_data *data);
+void	philo(t_data *data, t_philo *philo);
 
 // Philo_utils.c
 int		get_time(void);
@@ -80,7 +80,7 @@ int		ft_strlen(char *str);
 
 // Status.c
 int		is_alive(t_philo *philo, t_data *data);
-void	is_done(t_philo *philo, t_data *data);
+void	is_fed(t_philo *philo, t_data *data);
 void	is_eating(t_philo *philo, t_data *data);
 void	is_sleeping(t_philo *philo, t_data *data);
 void	is_thinking(t_philo *philo, t_data *data);

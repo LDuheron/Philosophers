@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 20:10:57 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/19 10:32:57 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/19 12:51:59 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	if (argc == 6)
 	{
 		initialize_structures(&data, &philo, argv);
-		// philo(&data);
+		philo(&data, &philo);
 	}
 	else
 		printf("Error : please enter five arguments.");
