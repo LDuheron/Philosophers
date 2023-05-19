@@ -13,3 +13,4 @@ AVANT DE PUSH :
 - Valgrind.
 - .h coherent.
 - Make fclean.
+- Completer le README
