@@ -10,7 +10,9 @@ SRCS        := \
 	main.c          \
 	philo.c          \
 	philo_utils.c          \
-	structure_management.c          \
+	structure/input_is_valid.c          \
+	structure/input_is_valid_utils.c          \
+	structure/structure_management.c          \
 
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
