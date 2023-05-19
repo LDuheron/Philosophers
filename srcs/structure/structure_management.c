@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 22:52:14 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/19 10:25:32 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/19 12:31:00 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ void	initialize_data_structure(t_data *data, char **argv)
 	data->time_to_die = get_arg(argv[2]);
 	data->time_to_eat = get_arg(argv[3]);
 	data->time_to_sleep = get_arg(argv[4]);
-	data->nb_time_eat = get_arg(argv[5]);
+	data->nb_required_meal = get_arg(argv[5]);
 }
+
+// changer prototype pour init l'id a N.
 
 void	initialize_philo_structure(t_philo *philo)
 {
+	philo->id = 0;
 	philo->status = START;
+	philo->nb_meal = 0;
 }
 
 void	initialize_structures(t_data *data, t_philo *philo, char **argv)

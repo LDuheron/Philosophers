@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 10:08:44 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/19 10:33:53 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/19 10:37:12 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ int	get_arg(char *input)
 		if (value > 0)
 			return (value);
 	}
-	printf("Error, please enter only strictly positive digits as parameters.");
+	printf("Error : please enter only strictly positive digits as parameters.");
 	exit(0);
 }

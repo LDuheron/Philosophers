@@ -1,0 +1,15 @@
+TO DO
+
+- init mutex, comprendre mutex
+- actions EATING
+- actions SLEEPING
+- actions THINKING
+- supervisor
+- count time.
+
+AVANT DE PUSH :
+- Commenter les fonctions.
+- Norminette.
+- Valgrind.
+- .h coherent.
+- Make fclean.

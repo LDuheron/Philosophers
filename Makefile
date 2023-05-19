@@ -10,6 +10,7 @@ SRCS        := \
 	main.c          \
 	philo.c          \
 	philo_utils.c          \
+	status.c			\
 	structure/input_is_valid.c          \
 	structure/input_is_valid_utils.c          \
 	structure/structure_management.c          \

@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 13:47:40 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/19 10:30:25 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/19 12:29:47 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include <unistd.h>
+# include <sys/time.h>
 # include <pthread.h>
+# include <unistd.h>
 
 //////////////////////////////////////////////////////////////////
 //																//
@@ -42,17 +43,21 @@ enum e_type_status_philo
 
 typedef struct s_data
 {
-	int	nb_philo;
-	int	fork;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	nb_time_eat;
+	int			fork;
+	int			nb_philo;
+	int			nb_required_meal;
+	suseconds_t	current_time;
+	suseconds_t	time_to_die;
+	suseconds_t	time_to_eat;
+	suseconds_t	time_to_sleep;
 }	t_data;
 
 typedef struct s_philo
 {
-	int	status;
+	int			id;
+	int			status;
+	int			nb_meal;	
+	suseconds_t	last_meal;
 }	t_philo;
 
 //////////////////////////////////////////////////////////////////
@@ -70,12 +75,19 @@ int		main(int argc, char **argv);
 void	philo(t_data *data);
 
 // Philo_utils.c
-
+int		get_time(void);
 int		ft_strlen(char *str);
+
+// Status.c
+int		is_alive(t_philo *philo, t_data *data);
+void	is_done(t_philo *philo, t_data *data);
+void	is_eating(t_philo *philo, t_data *data);
+void	is_sleeping(t_philo *philo, t_data *data);
+void	is_thinking(t_philo *philo, t_data *data);
 
 //////////////////////////////////////////////////////////////////
 //																//
-//					IN STRUCTURES DIR 	  						//
+//					  	IN STRUCTURES DIR 						//
 //																//
 //////////////////////////////////////////////////////////////////
 
@@ -90,7 +102,6 @@ int		is_digit(int c);
 int		is_sign(char c);
 
 // Structure_management.c
-
 void	initialize_data_structure(t_data *data, char **argv);
 void	initialize_philo_structure(t_philo *philo);
 void	initialize_structures(t_data *data, t_philo *philo, char **argv);
