@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 22:52:14 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/19 19:35:39 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/19 19:40:50 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	initialize_philo_structure(t_philo *philo, int i)
 {
 	if (pthread_mutex_init((&philo)->mutex, NULL) != 0)
 		error(0);
-	philo->id = i;
+	philo->id = i + 1;
 	philo->status = START;
 	philo->nb_meal = 0;
 	philo->last_meal = 0;
