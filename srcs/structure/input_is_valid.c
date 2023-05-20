@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 10:08:44 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/19 10:37:12 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/20 11:52:30 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	is_valid(char *input)
 // Get_arg : This function checks the validity of the input then 
 // converts it from char* to int. Returns an error if the input is not valid.
 
-// Passer en atol?
 int	get_arg(char *input)
 {
 	int	value;

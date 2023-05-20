@@ -11,13 +11,14 @@ Lgrind is a tool quite like Valgrind but for threads.
 WHAT IS A THREAD?
 
 In this project, we delve into a new concept: threads. 
-Threads enable concurrent execution and allow different parts of a program to run independently.  It works quite like processes with forks, but the main difference is that when forking, we duplicate all the variables, while threads share the same memory space.
+Threads enable concurrent execution and allow different parts of a program to run independently. It works quite like processes with forks, but the main difference is that when forking, we duplicate all the variables, while threads share the same memory space.
 
 That is really cool because it makes it easier to communicate between threads than it is to communicate between processes.
 
 Each philosopher is represented by a thread. 
-store them in an array.
+store them in an array. 
 
+WARNING : When multithreading, do not implement the pthread_create and pthread_join functions in the same while loop, otherwise, it would execute each thread one by one instead of executing them concurrently.
 
 But when using threads, we might encounter a race condition problem. I'll let you research the subject by yourself. Once again, the CodeVault video is very comprehensive: https://youtu.be/FY9livorrJI
 

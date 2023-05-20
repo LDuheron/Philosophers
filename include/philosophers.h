@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 13:47:40 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/19 19:36:45 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:38:10 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ enum e_type_status_philo
 
 typedef struct s_data
 {
+	char		**tab_philo;
 	int			fork;
 	int			nb_philo;
 	int			nb_required_meal;

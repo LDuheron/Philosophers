@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 22:52:14 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/19 19:40:50 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:37:42 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	initialize_data_structure(t_data *data, char **argv)
 {
+	data->tab_philo = NULL;
 	data->nb_death = 0;
 	data->nb_philo = get_arg(argv[1]);
 	check_nb_philo(data->nb_philo);
@@ -24,7 +25,7 @@ void	initialize_data_structure(t_data *data, char **argv)
 	data->nb_required_meal = get_arg(argv[5]);
 }
 
-// changer prototype pour init l'id a N.
+// time before death = nb_time_to_die + heure actuelle.
 
 void	initialize_philo_structure(t_philo *philo, int i)
 {
@@ -34,4 +35,5 @@ void	initialize_philo_structure(t_philo *philo, int i)
 	philo->status = START;
 	philo->nb_meal = 0;
 	philo->last_meal = 0;
+	// philo hour of death;
 }
