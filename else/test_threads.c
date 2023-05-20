@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 11:49:22 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/20 12:46:49 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/20 18:27:07 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*routine()
 
 int	main(int argc, char **argv)
 {
-	pthread_t	thread[argc];
+	pthread_t	thread[200];
 	int			i;
 
 	mail = 0;

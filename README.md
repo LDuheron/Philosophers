@@ -39,7 +39,6 @@ To improve the code's readability, I created an enum list of all the possible st
 
 enum e_type_status_philo
 {
-START,
 EATING,
 SLEEPING,
 THINKING,

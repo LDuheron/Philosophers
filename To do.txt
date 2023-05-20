@@ -1,7 +1,5 @@
 TO DO
-
-- creer les threads avec une boucle et les ranger dans un tableau (comment ?)
-- init les threads
+- update status.c as I changed the structures.
 - run les threads.
 - count time.
 

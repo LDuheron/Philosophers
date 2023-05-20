@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 10:08:44 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/20 11:52:30 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/20 20:29:27 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 void	check_nb_philo(int nb_philo)
 {
 	if (nb_philo < 2 || nb_philo > 200)
-	{
-		printf("Error : please enter a number of philosophers included in array [2;200].\n");
-		exit (0);
-	}
+		error(3);
 }
 
 // Is_valid : This function ensures the input respects the required
@@ -52,6 +49,6 @@ int	get_arg(char *input)
 		if (value > 0)
 			return (value);
 	}
-	printf("Error : please enter only strictly positive digits as parameters.");
-	exit(0);
+	error(4);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 13:47:40 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/20 14:38:10 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/20 21:03:12 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 
 enum e_type_status_philo
 {
-	START,
 	EATING,
 	SLEEPING,
 	THINKING,
@@ -42,26 +41,26 @@ enum e_type_status_philo
 //////////////////////////////////////////////////////////////////
 
 typedef struct s_data
-{
-	char		**tab_philo;
-	int			fork;
-	int			nb_philo;
-	int			nb_required_meal;
-	int			nb_death;
-	suseconds_t	current_time;
-	suseconds_t	time_to_die;
-	suseconds_t	time_to_eat;
-	suseconds_t	time_to_sleep;
+{	
+	pthread_mutex_t	*mutex;
+	struct s_philo	*philosophers;
+	int				nb_death;
+	int				fork;
+	int				nb_philo;
+	int				nb_required_meal;
+	suseconds_t		current_time;
+	suseconds_t		time_to_die;
+	suseconds_t		time_to_eat;
+	suseconds_t		time_to_sleep;
 }	t_data;
 
 typedef struct s_philo
 {
-	pthread_t		thread;
-	pthread_mutex_t	mutex;
 	int				id;
+	int				nb_meal;
 	int				status;
-	int				nb_meal;	
-	suseconds_t		last_meal;
+	pthread_t		thread;
+	suseconds_t		hour_death;
 }	t_philo;
 
 //////////////////////////////////////////////////////////////////
@@ -75,11 +74,16 @@ typedef struct s_philo
 // Main.c
 int		main(int argc, char **argv);
 
-// Erroc.c
+// Exit.c
+void	clean_philo(t_data *data);
 void	error(int code);
 
+// Initialization.c
+void	create_a_mutex(t_data *data);
+void	create_a_philosopher(t_data *data);
+void	initialize_data_structure(t_data *data, char **argv);
+
 // Philo.c
-t_philo	create_a_philosopher(int i);
 void	philo(t_data *data);
 
 // Philo_utils.c
@@ -94,22 +98,18 @@ void	is_thinking(t_philo *philo, t_data *data);
 
 //////////////////////////////////////////////////////////////////
 //																//
-//                      IN STRUCTURES DIR                       //
+//                   	IN CHECK INPUT DIR                      //
 //																//
 //////////////////////////////////////////////////////////////////
 
 // Input_is_valid.c
 void	check_nb_philo(int nb_philo);
-int		is_valid(char *input);
 int		get_arg(char *input);
+int		is_valid(char *input);
 
 // Input_is_valid_utils.c
 int		ft_atoi(const char *str);
 int		is_digit(int c);
 int		is_sign(char c);
-
-// Structure_management.c
-void	initialize_data_structure(t_data *data, char **argv);
-void	initialize_philo_structure(t_philo *philo, int i);
 
 #endif

@@ -8,13 +8,13 @@ SRC_DIR     := srcs
 OBJ_DIR     := obj
 SRCS        := \
 	main.c          \
-	error.c          \
+	exit.c          \
+	initialization.c          \
 	philo.c          \
 	philo_utils.c          \
 	status.c			\
-	structure/input_is_valid.c          \
-	structure/input_is_valid_utils.c          \
-	structure/structure_management.c          \
+	check_input/input_is_valid.c          \
+	check_input/input_is_valid_utils.c          \
 
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

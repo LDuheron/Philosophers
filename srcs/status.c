@@ -19,7 +19,7 @@
 
 int	is_alive(t_philo *philo, t_data *data)
 {
-	if ((philo->last_meal - data->current_time) < data->time_to_die)
+	if ((philo->hour_death - data->current_time) < data->time_to_die)
 		return (1);
 	philo->status = DEAD;
 	data->nb_death += 1;

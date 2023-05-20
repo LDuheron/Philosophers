@@ -6,93 +6,56 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 23:27:07 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/20 14:40:14 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/20 21:07:05 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-// void	*routine()
+// void	*routine_test2()
 // {
-// 	t_philo	philo;
-
-// 	initialize_philo_structure(&philo);
 // 	while (data->nb_death == 0 && philo->status != FED)
 // 	{
 // 		printf("New philosopher created :)\n");
 // 	}
-// 	pthread_mutex_destroy(&(philo)->mutex);
-// 	return NULL;
+// 	return (NULL);
 // }
-
-// void	create_a_philosopher(int i)
-// {
-// 	t_philo	philosopher;
-
-// 	initialize_philo_structure(&philosopher, i);
-// 	pthread_create
-// 	return (philosopher);
-// }
-
-// void	philo(t_data *data, int nb_philo)
-// {
-// 	int			i;
-
-// 	i = 0;
-// 	while (i < data->nb_philo)
-// 	{
-// 		if (pthread_create(&thread[i], NULL, &create_a_philosopher(i), NULL) != 0)
-// 			error(1);
-// 		i++;
-// 	}
 
 // 	// if (pthread_join(philo->thread, NULL) != 0)
 // 	// 	error(2);
 // }
 
-// tableau de pointeur vers structure philo?
+// void	*real_routine()
+// {
+// 	while (data->nb_death == 0 && philo->status != FED)
+// 	{
+// 		is_eating();
+// 		is_sleeping();
+// 		is_thinking();
+// 	}
+// }
 
-
-void	clear_philo(t_data *data)
+void	*routine_test1()
 {
-	int	i;
-
-	i = 0;
-	while (data->tab_philo[i])
-	{
-		pthread_mutex_destroy();
-	}
-}
-
-t_philo	*create_a_philosopher(int i)
-{
-	t_philo	philosopher;
-
-	initialize_philo_structure(&philosopher, i);
-
-	return (philosopher);
+	printf("in routine\n");
+	return (NULL);
 }
 
 void	philo(t_data *data)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	data->tab_philo = malloc(sizeof(t_philo * data->nb_philo));
-	while (i < data->philo)
+	while (i < data->nb_philo)
 	{
-		tab_philo[i] = create_a_philosopher(i);
+		pthread_create(&(data)->philosophers[i], NULL, &routine_test1, NULL);
+		printf("Thread %i started\n", i);
 		i++;
 	}
 	i = 0;
-	while (tab[i])
+	while (i < data->nb_philo)
 	{
-		run routine
-		i++;
-	}
-	while (tab[i])
-	{
-		pthread_join(&thread, NULL);
+		pthread_join(&data->philosophers[i], NULL);
 		i++;
 	}
 }
