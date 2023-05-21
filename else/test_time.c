@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   test_time.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/18 23:11:28 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/21 13:07:41 by lduheron         ###   ########.fr       */
+/*   Created: 2023/05/21 12:27:30 by lduheron          #+#    #+#             */
+/*   Updated: 2023/05/21 13:06:18 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philosophers.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/time.h>
+#include <pthread.h>
+#include <unistd.h>
 
-// GET TIME : This function returs the current time stamp in microseconds/
+// struct    timeval  {
+//   time_t        tv_sec ;   //used for seconds
+//   suseconds_t       tv_usec ;   //used for microseconds
+// }
+
+// GET_TIME : This function 
 
 suseconds_t	get_time(void)
 {
@@ -20,5 +29,16 @@ suseconds_t	get_time(void)
 	struct timezone	tz;
 
 	gettimeofday(&tv, &tz);
-	return (tv.tv_usec);
+	return(tv.tv_usec);
+}
+
+int	main(void)
+{
+	get_time();
+	get_time();
+	get_time();
+	get_time();
+	get_time();
+	get_time();
+	return (0);
 }

@@ -1,7 +1,5 @@
 TO DO
-- update status.c as I changed the structures.
-- run les threads.
-- count time.
+- s'assurer qu'ils utilisent bien la fourchette gauche et droite et pas n'importe quelle fourchette.
 
 AVANT DE PUSH :
 - Commenter les fonctions.

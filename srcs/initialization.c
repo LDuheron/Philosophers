@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 22:52:14 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/20 20:58:28 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/21 19:51:03 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,11 @@ void	create_a_philosopher(t_data *data)
 	philosophers_tmp = malloc(sizeof(t_philo) * (data->nb_philo));
 	while (i < data->nb_philo)
 	{
+		philosophers_tmp[i].data_p = *data;
 		philosophers_tmp[i].id = i + 1;
 		philosophers_tmp[i].status = THINKING;
 		philosophers_tmp[i].nb_meal = 0;
-		philosophers_tmp[i].hour_death = data->time_to_die; // + current_time
+		philosophers_tmp[i].hour_death = data->time_to_die + get_time();
 		i++;
 	}
 	data->philosophers = philosophers_tmp;
