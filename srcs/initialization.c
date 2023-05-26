@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 22:52:14 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/21 19:51:03 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:37:01 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ void	create_a_philosopher(t_data *data)
 	data->philosophers = philosophers_tmp;
 }
 
-void	initialize_data_structure(t_data *data, char **argv)
+void	initialize_data_structure(t_data *data, int argc, char **argv)
 {
+	if (pthread_mutex_init(&data->mutex_print, NULL) != 0)
+		error(0);
 	data->mutex = NULL;
 	data->philosophers = NULL;
 	data->nb_death = 0;
@@ -58,5 +60,7 @@ void	initialize_data_structure(t_data *data, char **argv)
 	data->time_to_die = get_arg(argv[2]);
 	data->time_to_eat = get_arg(argv[3]);
 	data->time_to_sleep = get_arg(argv[4]);
-	data->nb_required_meal = get_arg(argv[5]);
+	data->nb_required_meal = 1;
+	if (argc == 6)
+		data->nb_required_meal = get_arg(argv[5]);
 }

@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 10:08:44 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/20 20:29:27 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:29:06 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_nb_philo(int nb_philo)
 {
-	if (nb_philo < 2 || nb_philo > 200)
+	if (nb_philo < 1 || nb_philo > 200)
 		error(3);
 }
 

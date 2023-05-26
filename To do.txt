@@ -8,3 +8,6 @@ AVANT DE PUSH :
 - .h coherent.
 - Make fclean.
 - Completer le README
+
+
+https://nafuka11.github.io/philosophers-visualizer/

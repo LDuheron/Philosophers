@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 13:47:40 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/21 20:14:46 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/26 15:46:18 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@
 
 enum e_type_status_philo
 {
+	ALIVE,
 	EATING,
 	SLEEPING,
 	THINKING,
 	FED,
+	FORK,
 	DEAD
 } ;
 
@@ -43,15 +45,16 @@ enum e_type_status_philo
 typedef struct s_data
 {	
 	pthread_mutex_t	*mutex;
+	pthread_mutex_t	mutex_print;
 	struct s_philo	*philosophers;
 	int				nb_death;
 	int				fork;
 	int				nb_philo;
 	int				nb_required_meal;
-	suseconds_t		current_time;
-	suseconds_t		time_to_die;
-	suseconds_t		time_to_eat;
-	suseconds_t		time_to_sleep;
+	int				current_time;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
 }	t_data;
 
 typedef struct s_philo
@@ -61,7 +64,7 @@ typedef struct s_philo
 	int				nb_meal;
 	int				status;
 	pthread_t		thread;
-	suseconds_t		hour_death;
+	int				hour_death;
 }	t_philo;
 
 //////////////////////////////////////////////////////////////////
@@ -82,13 +85,13 @@ void		error(int code);
 // Initialization.c
 void		create_a_mutex(t_data *data);
 void		create_a_philosopher(t_data *data);
-void		initialize_data_structure(t_data *data, char **argv);
+void		initialize_data_structure(t_data *data, int argc, char **argv);
 
 // Philo.c
 void		philo(t_data *data);
 
 // Philo_utils.c
-suseconds_t	get_time(void);
+int			get_time(void);
 
 // Status.c
 int			is_alive(t_philo *philo);
@@ -96,6 +99,7 @@ void		is_fed(t_philo *philo);
 void		is_eating(t_philo *philo);
 void		is_sleeping(t_philo *philo);
 void		is_thinking(t_philo *philo);
+void		print_in_routine(t_philo *philo, int status);
 
 //////////////////////////////////////////////////////////////////
 //																//

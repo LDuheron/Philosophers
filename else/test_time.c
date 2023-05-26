@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 12:27:30 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/21 13:06:18 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/05/26 13:37:39 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@
 
 // struct    timeval  {
 //   time_t        tv_sec ;   //used for seconds
-//   suseconds_t       tv_usec ;   //used for microseconds
+//   int       tv_usec ;   //used for microseconds
 // }
 
 // GET_TIME : This function 
 
-suseconds_t	get_time(void)
+int	get_time(void)
 {
 	struct timeval	tv;
 	struct timezone	tz;
 
 	gettimeofday(&tv, &tz);
-	return(tv.tv_usec);
+	return(tv.tv_sec / 1000);
 }
 
 int	main(void)

@@ -5,9 +5,6 @@ Link to the subject: https://cdn.intra.42.fr/pdf/pdf/66003/fr.subject.pdf
 
 Prior to diving into my notes and thought process for this project, I highly recommend watching the captivating YouTube video playlist titled "Unix Threads in C" created by CodeVault. It covers key notions regarding threads, race conditions, mutex, and even semaphores if you plan to tackle the bonus part.
 
-LGRIND
-Lgrind is a tool quite like Valgrind but for threads.
-
 WHAT IS A THREAD?
 
 In this project, we delve into a new concept: threads. 
@@ -20,11 +17,11 @@ store them in an array.
 
 WARNING : When multithreading, do not implement the pthread_create and pthread_join functions in the same while loop, otherwise, it would execute each thread one by one instead of executing them concurrently.
 
-But when using threads, we might encounter a race condition problem. I'll let you research the subject by yourself. Once again, the CodeVault video is very comprehensive: https://youtu.be/FY9livorrJI
+But when using threads, we might encounter a race condition problem. To check if you are facing this kind of problem, compile your code using the valgrind option : --tool=helgrind. I'll let you research the subject by yourself. Once again, the CodeVault video is very comprehensive: https://youtu.be/FY9livorrJI
 
 THE IMPORTANCE OF USING A MUTEX
 
-When multiple threads are executing concurrently, they may access shared data simultaneously, leading to data corruption or inconsistent results. Here, the mutex comes into play.
+When multiple threads are executing concurrently, they may access shared data simultaneously, leading to data corruption or inconsistent results. Here, the mutex comes into play. Mutex is an abreviation for "mutual exclusion".
 
 A mutex serves as a synchronization mechanism to protect shared resources and prevent race conditions in multi-threaded programs. They act as guards for critical sections, ensuring that only one thread can access the protected resource at a time, while others patiently wait their turn. In C, a mutex can be seen as a lock that threads can acquire or release.
 
@@ -35,7 +32,7 @@ Once a thread acquires the mutex, it has exclusive access to a critical section 
 After completing its work in the critical section, the thread releases the mutex, allowing other waiting threads to acquire it and continue their execution. Releasing the mutex enables other threads to access the shared resource one by one in an orderly manner.
 
 PHILOSOPHERS' STATUS
-To improve the code's readability, I created an enum list of all the possible statuses of the philosophers. They are all quite self-explanatory, except, perhaps, the FED status, which means that the philosopher has eaten the required number of times.
+To improve the code's readability, I created an enum list of all the possible statuses of the philosophers. They are all quite self-explanatory, except, perhaps, the FED status, which means that the philosopher has eaten the required number of times and the FORK status, which means the philo has taken a fork.
 
 enum e_type_status_philo
 {
