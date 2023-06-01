@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:18:14 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/26 15:37:15 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:17:12 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ void	error(int code)
 	if (code == 2)
 		printf("An error occured in pthread_join.\n");
 	if (code == 3)
-		printf("Error : please enter a number of philosophers included in array [1;200].\n");
+		printf("Error : please enter a number of philosophers
+			included in array [1;200].\n");
 	if (code == 4)
-		printf("Error : please enter only strictly positive digits as parameters.\n");
+		printf("Error : please enter only strictly positive digit
+			as parameters.\n");
 	exit(1);
 }
