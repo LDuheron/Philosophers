@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 22:52:14 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/26 15:37:01 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/06/23 13:06:10 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,13 @@ void	create_a_philosopher(t_data *data)
 	while (i < data->nb_philo)
 	{
 		philosophers_tmp[i].data_p = *data;
-		philosophers_tmp[i].id = i + 1;
+		philosophers_tmp[i].id = i;
 		philosophers_tmp[i].status = THINKING;
 		philosophers_tmp[i].nb_meal = 0;
+		philosophers_tmp[i].start_time = get_time();
 		philosophers_tmp[i].hour_death = data->time_to_die + get_time();
+		philosophers_tmp[i].left_fork = &data->mutex[i % data->nb_philo];
+		philosophers_tmp[i].right_fork = &data->mutex[(i + 1) % data->nb_philo];
 		i++;
 	}
 	data->philosophers = philosophers_tmp;

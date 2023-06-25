@@ -7,14 +7,15 @@ NAME := philo
 SRC_DIR     := srcs
 OBJ_DIR     := obj
 SRCS        := \
-	main.c          \
-	exit.c          \
-	initialization.c          \
-	philo.c          \
-	philo_utils.c          \
-	status.c			\
-	check_input/input_is_valid.c          \
-	check_input/input_is_valid_utils.c          \
+	main.c								\
+	exit.c								\
+	initialization.c					\
+	monitor.c							\
+	philo.c								\
+	philo_utils.c						\
+	status.c							\
+	check_input/input_is_valid.c		\
+	check_input/input_is_valid_utils.c	\
 
 SRCS        := $(SRCS:%=$(SRC_DIR)/%)
 OBJS        := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

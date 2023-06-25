@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 13:47:40 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/26 15:46:18 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:08:42 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 //								ENUM							//
 //																//
 //////////////////////////////////////////////////////////////////
+
+# define SUCCESS 1
+# define ERROR_MALLOC 2
+# define ERROR_TIME 3
 
 enum e_type_status_philo
 {
@@ -48,10 +52,10 @@ typedef struct s_data
 	pthread_mutex_t	mutex_print;
 	struct s_philo	*philosophers;
 	int				nb_death;
+	int				current_time;
 	int				fork;
 	int				nb_philo;
 	int				nb_required_meal;
-	int				current_time;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
@@ -60,10 +64,13 @@ typedef struct s_data
 typedef struct s_philo
 {
 	t_data			data_p;
+	pthread_t		thread;
+	pthread_mutex_t	*left_fork;
+	pthread_mutex_t	*right_fork;
+	int				start_time;
 	int				id;
 	int				nb_meal;
 	int				status;
-	pthread_t		thread;
 	int				hour_death;
 }	t_philo;
 
@@ -87,19 +94,25 @@ void		create_a_mutex(t_data *data);
 void		create_a_philosopher(t_data *data);
 void		initialize_data_structure(t_data *data, int argc, char **argv);
 
+// Monitor.c
+void		is_dead(t_data *data, int i);
+void		is_fed(t_philo *philo);
+int			all_philo_fed(t_data *data);
+void		*monitor_routine(void *arg);
+
 // Philo.c
 void		philo(t_data *data);
+void		*routine(void *arg);
 
 // Philo_utils.c
+void		ft_usleep(useconds_t time);
 int			get_time(void);
+void		print_in_routine(t_philo *philo, int status);
 
 // Status.c
-int			is_alive(t_philo *philo);
-void		is_fed(t_philo *philo);
 void		is_eating(t_philo *philo);
 void		is_sleeping(t_philo *philo);
 void		is_thinking(t_philo *philo);
-void		print_in_routine(t_philo *philo, int status);
 
 //////////////////////////////////////////////////////////////////
 //																//
