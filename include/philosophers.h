@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 13:47:40 by lduheron          #+#    #+#             */
-/*   Updated: 2023/06/25 14:08:42 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:01:13 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,30 @@
 # include <sys/time.h>
 # include <pthread.h>
 # include <unistd.h>
+# include <limits.h>
+
+# define COLOR_RESET "\e[0m"
+# define RED "\e[0;31m"
+# define GRN "\e[0;32m"
+# define YEL "\e[0;33m"
+# define MAG "\e[0;35m"
+# define BLU "\e[0;34m"
 
 //////////////////////////////////////////////////////////////////
 //																//
-//								ENUM							//
+//																//
 //																//
 //////////////////////////////////////////////////////////////////
 
+# define NO_MEAL_REQUIREMENT -9
+# define OVERFLOW -3
 # define SUCCESS 1
 # define ERROR_MALLOC 2
 # define ERROR_TIME 3
+# define ERROR_MUTEX_INIT 4
+# define ERROR_T_CREATE 5
+# define ERROR_T_JOIN 6
+# define ERROR_NEGATIVE_INPUT 7
 
 enum e_type_status_philo
 {
@@ -42,7 +56,7 @@ enum e_type_status_philo
 
 //////////////////////////////////////////////////////////////////
 //																//
-//							STRUCTURES							//
+//						  STRUCTURES							//
 //																//
 //////////////////////////////////////////////////////////////////
 
@@ -50,9 +64,10 @@ typedef struct s_data
 {	
 	pthread_mutex_t	*mutex;
 	pthread_mutex_t	mutex_print;
-	struct s_philo	*philosophers;
+	pthread_mutex_t	mutex_monitor;
+	struct s_philo	*philos;
 	int				nb_death;
-	int				current_time;
+	size_t			current_time;
 	int				fork;
 	int				nb_philo;
 	int				nb_required_meal;
@@ -63,15 +78,15 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	t_data			data_p;
+	t_data			*data_p;
 	pthread_t		thread;
-	pthread_mutex_t	*left_fork;
-	pthread_mutex_t	*right_fork;
-	int				start_time;
+	pthread_mutex_t	*first_fork;
+	pthread_mutex_t	*second_fork;
+	size_t			start_time;
 	int				id;
 	int				nb_meal;
 	int				status;
-	int				hour_death;
+	size_t			hour_death;
 }	t_philo;
 
 //////////////////////////////////////////////////////////////////
@@ -81,6 +96,8 @@ typedef struct s_philo
 //																//
 //																//
 //////////////////////////////////////////////////////////////////
+
+int			is_dead_check(t_data *data);
 
 // Main.c
 int			main(int argc, char **argv);
@@ -96,7 +113,7 @@ void		initialize_data_structure(t_data *data, int argc, char **argv);
 
 // Monitor.c
 void		is_dead(t_data *data, int i);
-void		is_fed(t_philo *philo);
+int			is_fed(t_philo *philo);
 int			all_philo_fed(t_data *data);
 void		*monitor_routine(void *arg);
 
@@ -105,8 +122,8 @@ void		philo(t_data *data);
 void		*routine(void *arg);
 
 // Philo_utils.c
-void		ft_usleep(useconds_t time);
-int			get_time(void);
+void		ft_usleep(size_t time, t_philo *philo);
+size_t		get_time(void);
 void		print_in_routine(t_philo *philo, int status);
 
 // Status.c

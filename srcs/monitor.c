@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:20:22 by lduheron          #+#    #+#             */
-/*   Updated: 2023/06/23 16:01:48 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/06/28 10:41:46 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@
 
 void	is_dead(t_data *data, int i)
 {
-	data->nb_death += 1;
 	pthread_mutex_lock(&data->mutex_print);
-	printf("%d %i died\n", data->philosophers[i].start_time - get_time(), data->philosophers[i].id + 1);
+	data->nb_death += 1;
 	i = 0;
+	printf(RED"%lu %i died\n"COLOR_RESET, get_time() - data->philos[i].start_time,
+		data->philos[i].id + 1);
 	while (i < data->nb_philo)
 	{
-		data->philosophers[i].status = DEAD;
+		data->philos[i].status = DEAD;
 		i++;
 	}
 	pthread_mutex_unlock(&data->mutex_print);
@@ -35,10 +36,19 @@ void	is_dead(t_data *data, int i)
 // amount of time required (define in the parameters of the program)
 // and changes the status of the philosopher if so.
 
-void	is_fed(t_philo *philo)
+int	is_fed(t_philo *philo)
 {
-	if (philo->nb_meal == philo->data_p.nb_required_meal)
+	if (philo->data_p->nb_required_meal == NO_MEAL_REQUIREMENT)
+		return (0);
+	pthread_mutex_lock(&philo->data_p->mutex_monitor);
+	if (philo->nb_meal == philo->data_p->nb_required_meal)
+	{
 		philo->status = FED;
+		pthread_mutex_unlock(&philo->data_p->mutex_monitor);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->data_p->mutex_monitor);
+	return (0);
 }
 
 int	all_philo_fed(t_data *data)
@@ -48,13 +58,13 @@ int	all_philo_fed(t_data *data)
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		is_fed(&data->philosophers[i]);
+		is_fed(&data->philos[i]);
 		i++;
 	}
 	i = 0;
 	while (i < data->nb_philo)
 	{
-		if (data->philosophers[i].status != FED)
+		if (data->philos[i].status != FED)
 			return (0);
 		i++;
 	}
@@ -63,26 +73,29 @@ int	all_philo_fed(t_data *data)
 
 void	*monitor_routine(void *arg)
 {
-	t_data	*data;
-	long	current_time;
-	int		i;
+	t_data			*data;
+	size_t			current_time;
+	int				i;
 
 	data = (t_data *) arg;
 	while (data->nb_death == 0)
 	{
-		i = 0;
-		while (i < data->nb_philo)
+		i = -1;
+		while (++i < data->nb_philo)
 		{
+			pthread_mutex_lock(&data->mutex_monitor);
 			current_time = get_time();
-			if (current_time > data->philosophers[i].hour_death)
+			if (get_time() >= data->philos[i].hour_death)
 			{
 				is_dead(data, i);
+				pthread_mutex_unlock(&data->mutex_monitor);
 				return (NULL);
 			}
-			i++;
+			pthread_mutex_unlock(&data->mutex_monitor);
+			if (is_dead_check(data) == 1 || all_philo_fed(data) == 1)
+				return (NULL);
 		}
-		if (all_philo_fed(data) || data->nb_death != 0)
-			return (NULL);
+		usleep(900);
 	}
 	return (NULL);
 }

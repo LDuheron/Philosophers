@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 10:08:44 by lduheron          #+#    #+#             */
-/*   Updated: 2023/05/26 15:29:06 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/06/26 13:57:25 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,15 @@ int	get_arg(char *input)
 {
 	int	value;
 
+	value = 0;
 	if (is_valid(input) == 1)
 	{
 		value = ft_atoi(input);
 		if (value > 0)
 			return (value);
 	}
-	error(4);
+	if (value == OVERFLOW)
+		error(OVERFLOW);
+	error(ERROR_NEGATIVE_INPUT);
 	return (0);
 }
