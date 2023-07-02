@@ -6,15 +6,27 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 23:11:28 by lduheron          #+#    #+#             */
-/*   Updated: 2023/06/27 17:01:47 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/07/02 14:57:06 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+int	check_stop(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data_p->mutex_dead);
+	if (philo->data_p->stop == 1)
+	{
+		pthread_mutex_unlock(&philo->data_p->mutex_dead);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->data_p->mutex_dead);
+	return (0);
+}
+
 // GET TIME : This function returs the current time stamp in microseconds
 // using the gettimeoftheday() fuction which returns time in seconds and 
-// miliseconds. Second = microsecond * 1000. Milisecond = microsecond / 1000.
+// miliseconds.
 
 size_t	get_time(void)
 {
@@ -32,8 +44,8 @@ size_t	get_time(void)
 }
 
 // FT_USLEEP : Recreating the usleep function because the latter 
-// is imprecise. Allows us to implement a synchronization mecanism.
-// checher s'il y a un mort
+// is imprecise.
+
 void	ft_usleep(size_t time, t_philo *philo)
 {
 	size_t	start;
@@ -47,7 +59,7 @@ void	ft_usleep(size_t time, t_philo *philo)
 void	print_in_routine(t_philo *philo, int status)
 {
 	pthread_mutex_lock(&philo->data_p->mutex_print);
-	if (philo->data_p->nb_death == 0)
+	if (check_stop(philo) == 0)
 	{
 		if (status == FORK)
 			printf("%lu %i has taken a fork\n",

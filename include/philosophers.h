@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 13:47:40 by lduheron          #+#    #+#             */
-/*   Updated: 2023/06/27 17:01:13 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/07/02 15:05:34 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,24 @@ enum e_type_status_philo
 	DEAD
 } ;
 
+/* if stop = 0 ne stoppe pas
+si stop = 1 ca stop */
+
 //////////////////////////////////////////////////////////////////
 //																//
-//						  STRUCTURES							//
+//							STRUCTURES							//
 //																//
 //////////////////////////////////////////////////////////////////
 
 typedef struct s_data
 {	
-	pthread_mutex_t	*mutex;
-	pthread_mutex_t	mutex_print;
-	pthread_mutex_t	mutex_monitor;
 	struct s_philo	*philos;
-	int				nb_death;
-	size_t			current_time;
-	int				fork;
+	pthread_mutex_t	*mutex_fork;
+	pthread_mutex_t	mutex_dead;
+	pthread_mutex_t	mutex_meal;
+	pthread_mutex_t	mutex_monitor;
+	pthread_mutex_t	mutex_print;
+	int				stop;
 	int				nb_philo;
 	int				nb_required_meal;
 	int				time_to_die;
@@ -83,10 +86,9 @@ typedef struct s_philo
 	pthread_mutex_t	*first_fork;
 	pthread_mutex_t	*second_fork;
 	size_t			start_time;
+	size_t			hour_death;
 	int				id;
 	int				nb_meal;
-	int				status;
-	size_t			hour_death;
 }	t_philo;
 
 //////////////////////////////////////////////////////////////////
@@ -96,8 +98,6 @@ typedef struct s_philo
 //																//
 //																//
 //////////////////////////////////////////////////////////////////
-
-int			is_dead_check(t_data *data);
 
 // Main.c
 int			main(int argc, char **argv);
@@ -112,16 +112,20 @@ void		create_a_philosopher(t_data *data);
 void		initialize_data_structure(t_data *data, int argc, char **argv);
 
 // Monitor.c
-void		is_dead(t_data *data, int i);
+int			is_dead(t_data *data, int i);
 int			is_fed(t_philo *philo);
 int			all_philo_fed(t_data *data);
 void		*monitor_routine(void *arg);
 
 // Philo.c
+
 void		philo(t_data *data);
+void		philo_one(t_data *data);
 void		*routine(void *arg);
+void		*routine_one(void *arg);
 
 // Philo_utils.c
+int			check_stop(t_philo *philo);
 void		ft_usleep(size_t time, t_philo *philo);
 size_t		get_time(void);
 void		print_in_routine(t_philo *philo, int status);

@@ -20,13 +20,12 @@ void	is_eating(t_philo *philo)
 	print_in_routine(philo, FORK);
 	print_in_routine(philo, EATING);
 	pthread_mutex_lock(&philo->data_p->mutex_monitor);
-	// printf("_________ : %i\n\n\n\n", philo->data_p->time_to_die);
-	// printf("_______get time__ : %zu\n\n\n\n", get_time());
 	philo->hour_death = get_time() + philo->data_p->time_to_die;
-	ft_usleep(philo->data_p->time_to_eat, philo);
-	
-	philo->nb_meal += 1;
 	pthread_mutex_unlock(&philo->data_p->mutex_monitor);
+	ft_usleep(philo->data_p->time_to_eat, philo);
+	pthread_mutex_lock(&philo->data_p->mutex_meal);
+	philo->nb_meal += 1;
+	pthread_mutex_unlock(&philo->data_p->mutex_meal);
 	pthread_mutex_unlock(philo->first_fork);
 	pthread_mutex_unlock(philo->second_fork);
 }
@@ -36,8 +35,8 @@ void	is_sleeping(t_philo *philo)
 	pthread_mutex_lock(&philo->data_p->mutex_print);
 	printf("%lu %i is sleeping\n", get_time() - philo->start_time,
 		philo->id + 1);
-	ft_usleep(philo->data_p->time_to_sleep, philo);
 	pthread_mutex_unlock(&philo->data_p->mutex_print);
+	ft_usleep(philo->data_p->time_to_sleep, philo);
 }
 
 void	is_thinking(t_philo *philo)
@@ -45,6 +44,6 @@ void	is_thinking(t_philo *philo)
 	pthread_mutex_lock(&philo->data_p->mutex_print);
 	printf("%lu %i is thinking\n", get_time() - philo->start_time,
 		philo->id + 1);
-	usleep(100);
 	pthread_mutex_unlock(&philo->data_p->mutex_print);
+	usleep(100);
 }

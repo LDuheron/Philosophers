@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 20:10:57 by lduheron          #+#    #+#             */
-/*   Updated: 2023/06/25 17:55:13 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/07/02 14:43:02 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,14 @@ int	main(int argc, char **argv)
 		initialize_data_structure(&data, argc, argv);
 		create_a_mutex(&data);
 		create_a_philosopher(&data);
-		pthread_create(&monitor, NULL, &monitor_routine, &data);
-		philo(&data);
-		pthread_join(monitor, NULL);
+		if (data.nb_philo == 1)
+			philo_one(&data);
+		else
+		{
+			pthread_create(&monitor, NULL, &monitor_routine, &data);
+			philo(&data);
+			pthread_join(monitor, NULL);
+		}
 		clean_philo(&data);
 	}
 	else

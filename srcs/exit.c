@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:18:14 by lduheron          #+#    #+#             */
-/*   Updated: 2023/06/26 13:57:21 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/07/02 15:04:48 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,20 @@ void	clean_philo(t_data *data)
 	int	i;
 
 	i = 0;
-	while (i < data->nb_philo)
+	if (data->mutex_fork)
 	{
-		pthread_mutex_destroy(&data->mutex[i]);
-		i++;
+		while (i < data->nb_philo)
+		{
+			pthread_mutex_destroy(&data->mutex_fork[i]);
+			i++;
+		}
+		free(data->mutex_fork);
 	}
-	free(data->mutex);
-	free(data->philos);
+	if (data->philos)
+		free(data->philos);
+	pthread_mutex_destroy(&data->mutex_dead);
+	pthread_mutex_destroy(&data->mutex_meal);
+	pthread_mutex_destroy(&data->mutex_monitor);
 	pthread_mutex_destroy(&data->mutex_print);
 }
 
@@ -64,5 +71,4 @@ void	error(int code)
 	}
 	if (code == OVERFLOW)
 		ft_putstr_fd("Error : overflow.\n", 2);
-	exit(1);
 }
