@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 13:47:40 by lduheron          #+#    #+#             */
-/*   Updated: 2023/07/02 15:05:34 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/07/02 17:33:38 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,18 @@
 //																//
 //////////////////////////////////////////////////////////////////
 
-# define NO_MEAL_REQUIREMENT -9
+# define ARG -11
+# define NO_MEAL_REQUIREMENT -10
+# define ERROR_TIME -9
+# define ERROR_N_I -8
+# define ERROR_P_I -7
+# define ERROR_T_JOIN -6
+# define ERROR_T_CREATE -5
+# define ERROR_MUTEX_INIT -4
 # define OVERFLOW -3
+# define ERROR_MALLOC -2
+# define ERROR -1
 # define SUCCESS 1
-# define ERROR_MALLOC 2
-# define ERROR_TIME 3
-# define ERROR_MUTEX_INIT 4
-# define ERROR_T_CREATE 5
-# define ERROR_T_JOIN 6
-# define ERROR_NEGATIVE_INPUT 7
 
 enum e_type_status_philo
 {
@@ -53,9 +56,6 @@ enum e_type_status_philo
 	FORK,
 	DEAD
 } ;
-
-/* if stop = 0 ne stoppe pas
-si stop = 1 ca stop */
 
 //////////////////////////////////////////////////////////////////
 //																//
@@ -104,18 +104,18 @@ int			main(int argc, char **argv);
 
 // Exit.c
 void		clean_philo(t_data *data);
-void		error(int code);
+int			error(int code);
 
 // Initialization.c
-void		create_a_mutex(t_data *data);
-void		create_a_philosopher(t_data *data);
-void		initialize_data_structure(t_data *data, int argc, char **argv);
+int			create_a_mutex(t_data *data);
+int			create_a_philosopher(t_data *data);
+int			initialize_data_structure(t_data *data, int argc, char **argv);
 
 // Monitor.c
 int			is_dead(t_data *data, int i);
 int			is_fed(t_philo *philo);
 int			all_philo_fed(t_data *data);
-void		*monitor_routine(void *arg);
+void		*monit_routine(void *arg);
 
 // Philo.c
 
@@ -142,7 +142,7 @@ void		is_thinking(t_philo *philo);
 //////////////////////////////////////////////////////////////////
 
 // Input_is_valid.c
-void		check_nb_philo(int nb_philo);
+int			check_nb_philo(int nb_philo);
 int			get_arg(char *input);
 int			is_valid(char *input);
 

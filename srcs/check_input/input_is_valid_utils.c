@@ -6,12 +6,11 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 10:28:19 by lduheron          #+#    #+#             */
-/*   Updated: 2023/06/26 11:28:10 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/07/02 15:48:18 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-// int max + int min
 
 int	ft_atoi(const char *str)
 {

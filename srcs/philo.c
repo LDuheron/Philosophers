@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 23:27:07 by lduheron          #+#    #+#             */
-/*   Updated: 2023/07/02 14:45:18 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/07/02 17:22:06 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	*routine_one(void *arg)
 	philo = (t_philo *) arg;
 	print_in_routine(philo, FORK);
 	ft_usleep(philo->data_p->time_to_die, philo);
+	printf("%lu %i died\n", get_time() - philo->data_p->philos[0].start_time, 1);
 	return (NULL);
 }
 

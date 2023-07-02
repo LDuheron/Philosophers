@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 19:18:14 by lduheron          #+#    #+#             */
-/*   Updated: 2023/07/02 15:04:48 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/07/02 17:28:27 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,24 +51,27 @@ void	clean_philo(t_data *data)
 	pthread_mutex_destroy(&data->mutex_print);
 }
 
-void	error(int code)
+int	error(int code)
 {
+	if (code == ARG)
+		ft_putstr_fd("Error : wrong number of arguments.\n", 2);
 	if (code == ERROR_MUTEX_INIT)
 		ft_putstr_fd("An error occured in pthread_mutex_init.\n", 2);
 	if (code == ERROR_T_CREATE)
 		ft_putstr_fd("An error occured in pthread_create.\n", 2);
 	if (code == ERROR_T_JOIN)
 		ft_putstr_fd("An error occured in pthread_join.\n", 2);
-	if (code == 3)
+	if (code == ERROR_P_I)
 	{
 		ft_putstr_fd("Error : please enter a number of philosophers ", 2);
 		ft_putstr_fd("included in array [1;200].\n", 2);
 	}
-	if (code == ERROR_NEGATIVE_INPUT)
+	if (code == ERROR_N_I)
 	{
 		ft_putstr_fd("Error : please enter only strictly", 2);
 		ft_putstr_fd(" positive digit as parameters.\n", 2);
 	}
 	if (code == OVERFLOW)
 		ft_putstr_fd("Error : overflow.\n", 2);
+	return (ERROR);
 }

@@ -6,16 +6,17 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 10:08:44 by lduheron          #+#    #+#             */
-/*   Updated: 2023/06/26 13:57:25 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/07/02 15:29:16 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	check_nb_philo(int nb_philo)
+int	check_nb_philo(int nb_philo)
 {
 	if (nb_philo < 1 || nb_philo > 200)
-		error(3);
+		return (error(ERROR_P_I));
+	return (SUCCESS);
 }
 
 // Is_valid : This function ensures the input respects the required
@@ -51,7 +52,6 @@ int	get_arg(char *input)
 			return (value);
 	}
 	if (value == OVERFLOW)
-		error(OVERFLOW);
-	error(ERROR_NEGATIVE_INPUT);
-	return (0);
+		return (error(OVERFLOW));
+	return (error(ERROR_N_I));
 }

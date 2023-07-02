@@ -6,7 +6,7 @@
 /*   By: lduheron <lduheron@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 15:20:22 by lduheron          #+#    #+#             */
-/*   Updated: 2023/07/02 15:05:47 by lduheron         ###   ########.fr       */
+/*   Updated: 2023/07/02 16:02:35 by lduheron         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	is_dead(t_data *data, int i)
 	data->stop = 1;
 	pthread_mutex_unlock(&data->mutex_dead);
 	pthread_mutex_lock(&data->mutex_print);
-	printf("%lu %i died\n"COLOR_RESET, get_time() - data->philos[i].start_time,
+	printf("%lu %i died\n", get_time() - data->philos[i].start_time,
 		data->philos[i].id + 1);
 	pthread_mutex_unlock(&data->mutex_print);
 	return (1);
@@ -67,7 +67,7 @@ int	all_philo_fed(t_data *data)
 	return (1);
 }
 
-void	*monitor_routine(void *arg)
+void	*monit_routine(void *arg)
 {
 	t_data			*data;
 	int				i;
